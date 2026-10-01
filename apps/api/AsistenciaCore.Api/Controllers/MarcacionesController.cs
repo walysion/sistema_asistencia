@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using AsistenciaCore.Api.Data;
+using AsistenciaCore.Api.Hubs;
 using AsistenciaCore.Api.Models;
 
 namespace AsistenciaCore.Api.Controllers;
@@ -12,10 +14,12 @@ namespace AsistenciaCore.Api.Controllers;
 public class MarcacionesController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IHubContext<AsistenciaHub> _hubContext;
 
-    public MarcacionesController(ApplicationDbContext context)
+    public MarcacionesController(ApplicationDbContext context, IHubContext<AsistenciaHub> hubContext)
     {
         _context = context;
+        _hubContext = hubContext;
     }
 
     private int ObtenerEmpresaIdDelToken()
@@ -79,7 +83,7 @@ public class MarcacionesController : ControllerBase
             }
         }
 
-        // 2. Validación de Geocercas (Geofencing con fórmula de Haversine)
+        // 2. Validación de Geocercas (Geofencing)
         var geocercasActivas = await _context.Geocercas
             .Where(g => g.EmpresaId == empresaId && g.Activa)
             .ToListAsync();
@@ -107,6 +111,21 @@ public class MarcacionesController : ControllerBase
 
         _context.Marcaciones.Add(marcacion);
         await _context.SaveChangesAsync();
+
+        // 3. Emitir evento WebSockets en tiempo real a la empresa correspondiente
+        await _hubContext.Clients.Group($"Empresa_{empresaId}")
+            .SendAsync("RecibirMarcacionEnVivo", new
+            {
+                MarcacionId = marcacion.Id,
+                EmpleadoId = marcacion.EmpleadoId,
+                NombreEmpleado = empleado.NombreCompleto,
+                CodigoTrabajador = empleado.CodigoTrabajador,
+                FechaHora = marcacion.FechaHoraServidor.ToString("yyyy-MM-dd HH:mm:ss UTC"),
+                TipoMovimiento = marcacion.TipoMovimiento,
+                Origen = marcacion.Origen,
+                MinutosAtraso = marcacion.MinutosAtraso,
+                FueraDeGeocerca = marcacion.FueraDeGeocerca
+            });
 
         return Ok(marcacion);
     }

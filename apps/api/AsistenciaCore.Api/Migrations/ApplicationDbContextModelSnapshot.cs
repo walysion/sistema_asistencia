@@ -22,6 +22,36 @@ namespace AsistenciaCore.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("AsistenciaCore.Api.Models.AuditoriaLog", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Accion")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Detalle")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("FechaHoraUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Usuario")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuditoriaLogs");
+                });
+
             modelBuilder.Entity("AsistenciaCore.Api.Models.Empleado", b =>
                 {
                     b.Property<int>("Id")
@@ -164,6 +194,94 @@ namespace AsistenciaCore.Api.Migrations
                     b.ToTable("Marcaciones");
                 });
 
+            modelBuilder.Entity("AsistenciaCore.Api.Models.SolicitudPermiso", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EmpleadoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("FechaSolicitud")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Motivo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TipoPermiso")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpleadoId");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.ToTable("SolicitudesPermiso");
+                });
+
+            modelBuilder.Entity("AsistenciaCore.Api.Models.TerminalKiosco", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ApiKey")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("FechaRegistro")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("GeocercaId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NumeroSerie")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UltimaConexion")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.HasIndex("GeocercaId");
+
+                    b.ToTable("TerminalesKiosco");
+                });
+
             modelBuilder.Entity("AsistenciaCore.Api.Models.Turno", b =>
                 {
                     b.Property<int>("Id")
@@ -265,6 +383,42 @@ namespace AsistenciaCore.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Empleado");
+                });
+
+            modelBuilder.Entity("AsistenciaCore.Api.Models.SolicitudPermiso", b =>
+                {
+                    b.HasOne("AsistenciaCore.Api.Models.Empleado", "Empleado")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AsistenciaCore.Api.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empleado");
+
+                    b.Navigation("Empresa");
+                });
+
+            modelBuilder.Entity("AsistenciaCore.Api.Models.TerminalKiosco", b =>
+                {
+                    b.HasOne("AsistenciaCore.Api.Models.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AsistenciaCore.Api.Models.Geocerca", "Geocerca")
+                        .WithMany()
+                        .HasForeignKey("GeocercaId");
+
+                    b.Navigation("Empresa");
+
+                    b.Navigation("Geocerca");
                 });
 
             modelBuilder.Entity("AsistenciaCore.Api.Models.Turno", b =>

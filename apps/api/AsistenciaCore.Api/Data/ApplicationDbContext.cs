@@ -16,4 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Turno> Turnos { get; set; }
     public DbSet<Geocerca> Geocercas { get; set; }
+    public DbSet<SolicitudPermiso> SolicitudesPermiso { get; set; }
+    public DbSet<AuditoriaLog> AuditoriaLogs { get; set; }
+    public DbSet<TerminalKiosco> TerminalesKiosco { get; set; }
 }

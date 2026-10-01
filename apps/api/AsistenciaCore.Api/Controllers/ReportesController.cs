@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AsistenciaCore.Api.Data;
+using AsistenciaCore.Api.Models;
 
 namespace AsistenciaCore.Api.Controllers;
 
@@ -22,6 +23,11 @@ public class ReportesController : ControllerBase
     {
         var empresaIdClaim = User.FindFirst("EmpresaId")?.Value;
         return int.TryParse(empresaIdClaim, out int id) ? id : 0;
+    }
+
+    private string ObtenerUsuarioDelToken()
+    {
+        return User.Identity?.Name ?? User.FindFirst("sub")?.Value ?? "ADMIN_SISTEMA";
     }
 
     // GET: api/Reportes/asistencia-rango?fechaInicio=2026-10-01&fechaFin=2026-10-31
@@ -133,10 +139,77 @@ public class ReportesController : ControllerBase
             builder.AppendLine(linea);
         }
 
+        // Registro de Auditoría
+        _context.AuditoriaLogs.Add(new AuditoriaLog
+        {
+            EmpresaId = empresaId,
+            Accion = "EXPORTAR_REPORTE_MARCACIONES_CSV",
+            Detalle = $"Descarga de marcaciones desde {fechaInicio:yyyy-MM-dd} hasta {fechaFin:yyyy-MM-dd}. Total filas: {marcaciones.Count}",
+            FechaHoraUtc = DateTime.UtcNow,
+            Usuario = ObtenerUsuarioDelToken()
+        });
+        await _context.SaveChangesAsync();
+
         // BOM UTF-8 para garantizar codificación correcta en Excel
         var bytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(builder.ToString())).ToArray();
         
         var nombreArchivo = $"Reporte_Asistencia_{fechaInicio:yyyyMMdd}_a_{fechaFin:yyyyMMdd}.csv";
+        return File(bytes, "text/csv; charset=utf-8", nombreArchivo);
+    }
+
+    // GET: api/Reportes/exportar-resumen-csv?fechaInicio=2026-10-01&fechaFin=2026-10-31
+    [HttpGet("exportar-resumen-csv")]
+    public async Task<IActionResult> ExportarResumenCsv([FromQuery] DateTime fechaInicio, [FromQuery] DateTime fechaFin)
+    {
+        int empresaId = ObtenerEmpresaIdDelToken();
+        if (empresaId == 0) return Unauthorized("Token inválido.");
+
+        var inicioUtc = DateTime.SpecifyKind(fechaInicio.Date, DateTimeKind.Utc);
+        var finUtc = DateTime.SpecifyKind(fechaFin.Date.AddDays(1).AddTicks(-1), DateTimeKind.Utc);
+
+        var empleados = await _context.Empleados
+            .Where(e => e.EmpresaId == empresaId && e.Activo)
+            .ToListAsync();
+
+        var empleadosIds = empleados.Select(e => e.Id).ToList();
+
+        var marcaciones = await _context.Marcaciones
+            .Where(m => empleadosIds.Contains(m.EmpleadoId) 
+                     && m.FechaHoraServidor >= inicioUtc 
+                     && m.FechaHoraServidor <= finUtc)
+            .ToListAsync();
+
+        var builder = new StringBuilder();
+        builder.AppendLine("Empleado ID;Codigo Trabajador;Nombre Completo;Total Dias Asistidos;Total Minutos Atraso;Total Alertas Geocerca;Total Marcaciones");
+
+        foreach (var emp in empleados)
+        {
+            var marcacionesEmp = marcaciones.Where(m => m.EmpleadoId == emp.Id).ToList();
+            var entradas = marcacionesEmp.Where(m => m.TipoMovimiento.ToUpper() == "ENTRADA").ToList();
+
+            int diasAsistidos = entradas.Select(m => m.FechaHoraServidor.Date).Distinct().Count();
+            int minutosAtraso = entradas.Sum(m => m.MinutosAtraso);
+            int alertasGeocerca = marcacionesEmp.Count(m => m.FueraDeGeocerca);
+            int totalMarcaciones = marcacionesEmp.Count;
+
+            var linea = $"{emp.Id};\"{emp.CodigoTrabajador}\";\"{emp.NombreCompleto}\";{diasAsistidos};{minutosAtraso};{alertasGeocerca};{totalMarcaciones}";
+            builder.AppendLine(linea);
+        }
+
+        // Registro de Auditoría
+        _context.AuditoriaLogs.Add(new AuditoriaLog
+        {
+            EmpresaId = empresaId,
+            Accion = "EXPORTAR_REPORTE_RESUMEN_CSV",
+            Detalle = $"Descarga de reporte resumido por empleado desde {fechaInicio:yyyy-MM-dd} hasta {fechaFin:yyyy-MM-dd}. Empleados procesados: {empleados.Count}",
+            FechaHoraUtc = DateTime.UtcNow,
+            Usuario = ObtenerUsuarioDelToken()
+        });
+        await _context.SaveChangesAsync();
+
+        var bytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(builder.ToString())).ToArray();
+        var nombreArchivo = $"Reporte_Resumen_Empleados_{fechaInicio:yyyyMMdd}_a_{fechaFin:yyyyMMdd}.csv";
+
         return File(bytes, "text/csv; charset=utf-8", nombreArchivo);
     }
 }

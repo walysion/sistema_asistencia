@@ -122,3 +122,8 @@ C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\S
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\StackExchange.Redis.dll
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\obj\Debug\net8.0\AsistenciaCore.Api.sourcelink.json
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
