@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uZrsAcPpKT4=",
+  "dgSpecHash": "RYMNqXta1vc=",
   "success": true,
   "projectFilePath": "C:\\Users\\WALTER GUERRERO IT\\Desktop\\WALTER\\PROGRAMAS PYTHON BY WALTER GUERRERO\\SISTEMA ASISTENCIA WALTER\\apps\\api\\AsistenciaCore.Api\\AsistenciaCore.Api.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,7 @@
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.1\\microsoft.extensions.caching.memory.8.0.1.nupkg.sha512",
+    "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.caching.stackexchangeredis\\8.0.11\\microsoft.extensions.caching.stackexchangeredis.8.0.11.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.1\\microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
@@ -41,6 +42,8 @@
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\npgsql\\8.0.6\\npgsql.8.0.6.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.11\\npgsql.entityframeworkcore.postgresql.8.0.11.nupkg.sha512",
+    "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\stackexchange.redis\\2.7.27\\stackexchange.redis.2.7.27.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\WALTER GUERRERO IT\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",

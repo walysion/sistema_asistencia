@@ -15,4 +15,5 @@ public class ApplicationDbContext : DbContext
     public DbSet<Marcacion> Marcaciones { get; set; }
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Turno> Turnos { get; set; }
+    public DbSet<Geocerca> Geocercas { get; set; }
 }

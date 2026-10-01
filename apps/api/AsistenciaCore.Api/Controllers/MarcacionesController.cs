@@ -50,7 +50,6 @@ public class MarcacionesController : ControllerBase
     {
         int empresaId = ObtenerEmpresaIdDelToken();
 
-        // Cargar al empleado incluyendo su Turno asignado
         var empleado = await _context.Empleados
             .Include(e => e.Turno)
             .FirstOrDefaultAsync(e => e.Id == marcacion.EmpleadoId && e.EmpresaId == empresaId);
@@ -62,7 +61,7 @@ public class MarcacionesController : ControllerBase
 
         marcacion.FechaHoraServidor = DateTime.UtcNow;
 
-        // Cálculo de Atrasos automático si el movimiento es 'ENTRADA' y tiene Turno asignado
+        // 1. Cálculo de Atrasos automático
         if (marcacion.TipoMovimiento.ToUpper() == "ENTRADA" && empleado.Turno != null)
         {
             TimeSpan horaMarcada = marcacion.FechaHoraDispositivo.TimeOfDay;
@@ -80,9 +79,53 @@ public class MarcacionesController : ControllerBase
             }
         }
 
+        // 2. Validación de Geocercas (Geofencing con fórmula de Haversine)
+        var geocercasActivas = await _context.Geocercas
+            .Where(g => g.EmpresaId == empresaId && g.Activa)
+            .ToListAsync();
+
+        if (geocercasActivas.Any() && marcacion.Latitud.HasValue && marcacion.Longitud.HasValue)
+        {
+            bool estaDentroDeAlguna = false;
+
+            foreach (var g in geocercasActivas)
+            {
+                double distanciaMetros = CalcularDistanciaHaversine(
+                    marcacion.Latitud.Value, marcacion.Longitud.Value,
+                    g.Latitud, g.Longitud
+                );
+
+                if (distanciaMetros <= g.RadioMetros)
+                {
+                    estaDentroDeAlguna = true;
+                    break;
+                }
+            }
+
+            marcacion.FueraDeGeocerca = !estaDentroDeAlguna;
+        }
+
         _context.Marcaciones.Add(marcacion);
         await _context.SaveChangesAsync();
 
         return Ok(marcacion);
     }
+
+    private static double CalcularDistanciaHaversine(double lat1, double lon1, double lat2, double lon2)
+    {
+        const double RadioTierraMetros = 6371000.0;
+
+        double dLat = ToRadians(lat2 - lat1);
+        double dLon = ToRadians(lon2 - lon1);
+
+        double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                   Math.Cos(ToRadians(lat1)) * Math.Cos(ToRadians(lat2)) *
+                   Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+        double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+        return RadioTierraMetros * c;
+    }
+
+    private static double ToRadians(double grados) => grados * (Math.PI / 180.0);
 }
