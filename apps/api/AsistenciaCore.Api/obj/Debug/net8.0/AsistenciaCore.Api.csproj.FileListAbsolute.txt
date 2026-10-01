@@ -127,3 +127,12 @@ C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\S
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore.dll
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\apps\api\AsistenciaCore.Api\bin\Debug\net8.0\Serilog.Sinks.File.dll

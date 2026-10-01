@@ -139,3 +139,13 @@ C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\S
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\obj\Debug\net8.0\AsistenciaCore.Tests.pdb
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\obj\Debug\net8.0\AsistenciaCore.Tests.genruntimeconfig.cache
 C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\obj\Debug\net8.0\ref\AsistenciaCore.Tests.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Users\WALTER GUERRERO IT\Desktop\WALTER\PROGRAMAS PYTHON BY WALTER GUERRERO\SISTEMA ASISTENCIA WALTER\tests\AsistenciaCore.Tests\bin\Debug\net8.0\Serilog.Sinks.File.dll

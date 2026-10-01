@@ -63,6 +63,9 @@ namespace AsistenciaCore.Api.Migrations
                     b.Property<bool>("Activo")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Cargo")
+                        .HasColumnType("text");
+
                     b.Property<string>("CodigoTrabajador")
                         .IsRequired()
                         .HasColumnType("text");
@@ -70,8 +73,14 @@ namespace AsistenciaCore.Api.Migrations
                     b.Property<int>("EmpresaId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime?>("FechaContratacion")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("NombreCompleto")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RutDni")
                         .HasColumnType("text");
 
                     b.Property<int?>("TurnoId")
@@ -79,9 +88,10 @@ namespace AsistenciaCore.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpresaId");
-
                     b.HasIndex("TurnoId");
+
+                    b.HasIndex("EmpresaId", "CodigoTrabajador")
+                        .IsUnique();
 
                     b.ToTable("Empleados");
                 });
@@ -189,7 +199,7 @@ namespace AsistenciaCore.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmpleadoId");
+                    b.HasIndex("EmpleadoId", "FechaHoraServidor");
 
                     b.ToTable("Marcaciones");
                 });
@@ -275,6 +285,9 @@ namespace AsistenciaCore.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApiKey")
+                        .IsUnique();
+
                     b.HasIndex("EmpresaId");
 
                     b.HasIndex("GeocercaId");
@@ -331,15 +344,27 @@ namespace AsistenciaCore.Api.Migrations
                     b.Property<int>("EmpresaId")
                         .HasColumnType("integer");
 
+                    b.Property<DateTime>("FechaCreacion")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Rol")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("EmpresaId");
 
