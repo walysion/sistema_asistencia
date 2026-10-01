@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AsistenciaCore.Api.props" />
+</Project>
