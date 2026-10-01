@@ -1,59 +1,65 @@
 version: '3.8'
 
 services:
-  postgres:
+  asistenciacore-postgres:
     image: postgres:16-alpine
     container_name: asistenciacore-postgres
-    restart: always
     environment:
-      POSTGRES_DB: asistencia_saas
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: adminpassword123
+      POSTGRES_DB: AsistenciaDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: PostgresPassword2026!
     ports:
-      - "5435:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d asistencia_saas"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
 
-  redis:
+  asistenciacore-redis:
     image: redis:7-alpine
     container_name: asistenciacore-redis
-    restart: always
     ports:
       - "6379:6379"
-    volumes:
-      - redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 5s
       retries: 5
 
-  api:
+  asistenciacore-api:
     build:
       context: ./apps/api/AsistenciaCore.Api
       dockerfile: Dockerfile
     container_name: asistenciacore-api
-    restart: always
     ports:
       - "5240:8080"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=asistencia_saas;Username=admin;Password=adminpassword123
-      - ConnectionStrings__Redis=redis:6379
-      - Jwt__Secret=ClaveSuperSecretaSaaSAsistencia2026_UltraSecureKey!
-      - Jwt__Issuer=AsistenciaCore
-      - Jwt__Audience=AsistenciaClients
+      - ConnectionStrings__DefaultConnection=Host=asistenciacore-postgres;Database=AsistenciaDb;Username=postgres;Password=PostgresPassword2026!
+      - ConnectionStrings__RedisConnection=asistenciacore-redis:6379
+      - Jwt__SecretKey=SuperSecretKeySaaSAsistenciaCore2026_EnterpriseMultiTenantAuth
+      - Jwt__Issuer=AsistenciaCore.Api
+      - Jwt__Audience=AsistenciaCore.Clients
     depends_on:
-      postgres:
+      asistenciacore-postgres:
         condition: service_healthy
-      redis:
+      asistenciacore-redis:
         condition: service_healthy
+
+  asistenciacore-web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    container_name: asistenciacore-web
+    ports:
+      - "3001:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5240/api
+      - NEXT_PUBLIC_SIGNALR_URL=http://localhost:5240/hubs/asistencia
+    depends_on:
+      - asistenciacore-api
 
 volumes:
   postgres_data:
-  redis_data:

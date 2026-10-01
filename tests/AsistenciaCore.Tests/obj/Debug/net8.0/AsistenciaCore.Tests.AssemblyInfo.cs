@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AsistenciaCore.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c53491a0b67ef4095447daf58363f2294c474c2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42cde282f5cc7cbf80ee50c686598557ab901b6a")]
 [assembly: System.Reflection.AssemblyProductAttribute("AsistenciaCore.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AsistenciaCore.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

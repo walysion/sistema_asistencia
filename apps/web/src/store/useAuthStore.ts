@@ -1,27 +1,27 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface AuthState {
+  token: string | null;
   email: string | null;
   rol: string | null;
-  isAuthenticated: boolean;
-  setAuth: (email: string, rol: string, accessToken: string, refreshToken: string) => void;
+  empresaId: number | null;
+  setAuth: (token: string, email: string, rol: string, empresaId?: number) => void;
   logout: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  email: null,
-  rol: null,
-  isAuthenticated: false,
-
-  setAuth: (email, rol, accessToken, refreshToken) => {
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-    set({ email, rol, isAuthenticated: true });
-  },
-
-  logout: () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    set({ email: null, rol: null, isAuthenticated: false });
-  },
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      token: null,
+      email: null,
+      rol: null,
+      empresaId: null,
+      setAuth: (token, email, rol, empresaId) => set({ token, email, rol, empresaId: empresaId ?? null }),
+      logout: () => set({ token: null, email: null, rol: null, empresaId: null }),
+    }),
+    {
+      name: 'auth-storage',
+    }
+  )
+);
